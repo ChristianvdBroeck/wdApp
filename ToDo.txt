@@ -1,0 +1,16 @@
+Make symptom list -> Create searchbar 
+Create Splashscreen
+
+
+
+
+
+
+
+
+
+ Stel user clickt op 2 opties , hoe gaan we verder? :
+    - eerst run down van optie 1, dan rundown van optie 2  of,
+    - alle 2 de opties binnen 1 scherm  -> highlighten wat relevant is
+    -
+    -
