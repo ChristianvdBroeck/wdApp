@@ -30,11 +30,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        children: _screens,
-        onPageChanged: _onPageChanged,
-        physics: PageScrollPhysics(),
+      body: Container(
+        height: MediaQuery.of(context).size.height * 1,
+        width: MediaQuery.of(context).size.width * 1,
+        child: PageView(
+          controller: _pageController,
+          children: _screens,
+          onPageChanged: _onPageChanged,
+          physics: PageScrollPhysics(),
+        ),
       ),
       bottomNavigationBar: Container(
         height: MediaQuery.of(context).size.height * 0.07,
