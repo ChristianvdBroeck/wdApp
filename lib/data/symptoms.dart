@@ -1,12 +1,20 @@
+import 'dart:collection';
+
 /// List of symptoms used for searching
 /// TODO:
 ///   - finish list with real data
 
-final List<String> symptoms = [
-  "Discolorisation of Leaves",
-  "Discolorisation of Stems",
-  "Deformation of Leaves", 
-  "Yellowing",
-  "Dark",
-  "Spots",
-];
+
+Map<String, List<String>> diagnosisSymptomsMapping = 
+  {
+    'Magnesium Deficiency' : [
+      'Yellowing',
+      'Spots'
+    ],
+    'Calcium Deficiency' : [
+      'Brown',
+      'Necrotic Spots'
+    ]
+  };
+
+  List<String> diagnosis = diagnosisSymptomsMapping.entries.map((entry) => entry.key).toList();
