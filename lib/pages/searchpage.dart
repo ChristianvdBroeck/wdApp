@@ -5,15 +5,16 @@ import 'home_page.dart';
 /// Basics from: https://dev.to/luizeduardotj/search-bar-in-flutter-33e1
 /// TODO:
 ///   - zoekfunctie resulteerd in error: fix
-///   - list moet lijst met symptomen worden
+///   - list moet lijst met diagnoses met hun symptomen worden
 ///   - list moet standaard niet zichtbaar zijn, pas na het invullen van query tonen
 ///   - recentList moet generiek worden -> kan denk ik pas na fix van boven (pas als de knop ingedrukt wordt dingen opslaan)
 ///   - op zoekresultaat klikken moet resulteren in pagina change
-///   - RESULTS -> listbuilder cards
+///   - design cards
 ///   - wil de gebruiker symptomen als resultaat? Of mogelijke diagnoses?
 
 class SearchPage extends StatefulWidget {
-  final List<String> list = symptoms;
+  final List<String> list = diagnosis;
+  final Map<String, List<String>> diagnosisAndSymptoms = diagnosisSymptomsMapping;
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -52,7 +53,9 @@ class Search extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return Container(
       child: Center(
-        child: Text(selectedResult),
+        child: Card(
+          child: Text(selectedResult),
+          )
       )
     );
   }
@@ -66,6 +69,11 @@ class Search extends SearchDelegate {
     List<String> suggestionList = [];
     query.isEmpty 
         ? suggestionList = recentList
+        // : listSearch.forEach((key, value) {
+        //   if (value.contains(query.toLowerCase())) {
+        //     suggestionList.add(key);
+        //   }
+        // });
         : suggestionList.addAll(listSearch.where(
             (element) => element.toLowerCase().contains(query.toLowerCase()),
           ));
@@ -73,26 +81,27 @@ class Search extends SearchDelegate {
           return ListView.builder(
             itemCount: suggestionList.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  suggestionList[index]
-                  ),
-                  onTap: () {
-                    selectedResult = suggestionList[index];
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => HomePage())
-                    );
-                  }
+              return Card(
+                  child: ListTile(
+                  title: Text(
+                    suggestionList[index]
+                    ),
+                    onTap: () {
+                      selectedResult = suggestionList[index];
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => HomePage()) // TODO: change to actual page
+                      );
+                    }
+                ),
               );
             },
           );
   }
-  
-  final List<String> list = List.generate(10, (index) => "Texto $index");
 }
 
 class _SearchPageState extends State<SearchPage> {
+  // main page of searchpage
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,16 +117,24 @@ class _SearchPageState extends State<SearchPage> {
         centerTitle: true,
         title: Text('Search Diagnoses'),
       ),
-      // body: Row(children: <Widget>[
-        // Text('Hier komt een search bar'),
-        body: ListView.builder(
-          itemCount: widget.list.length,
-          itemBuilder: (context, index) => ListTile(
-          title: Text(
-            widget.list[index]
-          )
-        )),
-      // ]),
-    );
+      // overview of all symptoms before search:
+      body: ListView.builder(
+        itemCount: widget.list.length,
+        itemBuilder: (context, index) => 
+          Card(
+            child: ListTile(
+              title: Text(
+                  widget.list[index]
+                ),
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => HomePage()) // TODO: change to actual page
+                );
+              }
+            ),
+          ),
+        )
+      );
   }
 }
