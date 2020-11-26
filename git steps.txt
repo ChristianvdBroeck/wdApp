@@ -1,0 +1,11 @@
+git pull			// haal meest recente code op
+git checkout -b	"test_branch"	// (vanaf master branch) maak new branch
+
+-- lekker coderen
+
+git status 			// zie huidige status (dus de changes die je lokaal hebt staan)
+git add .			// 'voeg' AL je changes 'toe' aan de commit
+git add "file_name"		// 'voeg' file_name 'toe' aan de commit
+git commit -m "name_commit"     // commit je toegevoegde changes (e.g. voor name_commit: "search bar added") deze staan
+				   klaar om te pushen
+git commit push origin		// push de changes remote, deze worden gemerged in de master branch
