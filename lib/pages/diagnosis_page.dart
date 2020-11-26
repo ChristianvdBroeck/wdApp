@@ -46,9 +46,9 @@ Let us help you figure out what is wrong.''',
                         textAlign: TextAlign.justify)),
                 Spacer(flex: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  child: RaisedButton(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    child: RaisedButton(
                       color: Color(0xFF56A67B),
                       onPressed: () {
                         Navigator.push(
@@ -58,8 +58,9 @@ Let us help you figure out what is wrong.''',
                         );
                       },
                       shape: StadiumBorder(),
-                      child: Text('Get Started')),
-                ),
+                      child: Text('Get Started',
+                          style: TextStyle(color: Colors.white)),
+                    )),
                 Spacer(flex: 14),
               ],
             )));
