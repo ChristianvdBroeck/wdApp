@@ -36,24 +36,44 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: _onPageChanged,
         physics: PageScrollPhysics(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_tree_rounded,
-                  color: _selectedIndex == 0 ? Colors.red : Colors.grey),
-              title: Text('diagnosis')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list_alt_rounded,
-                  color: _selectedIndex == 1 ? Colors.red : Colors.grey),
-              title: Text('complete list')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.search_rounded,
-                  color: _selectedIndex == 2 ? Colors.red : Colors.grey),
-              title: Text('search')),
-        ],
+      bottomNavigationBar: Container(
+        height: MediaQuery.of(context).size.height * 0.07,
+        child: BottomNavigationBar(
+          backgroundColor: Color(0xFFF6F2F1),
+          elevation: 0,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          onTap: _onItemTapped,
+          items: [
+            BottomNavigationBarItem(
+                icon: Container(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                  child: Image.asset('images/diagnoseicon.png',
+                      color: _selectedIndex == 0
+                          ? Color(0xFF56A67B)
+                          : Colors.grey),
+                ),
+                title: Text('diagnosis')),
+            BottomNavigationBarItem(
+                icon: Container(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                  child: Image.asset('images/listicon.png',
+                      color: _selectedIndex == 1
+                          ? Color(0xFF56A67B)
+                          : Colors.grey),
+                ),
+                title: Text('complete list')),
+            BottomNavigationBarItem(
+                icon: Container(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                  child: Image.asset('images/searchicon.png',
+                      color: _selectedIndex == 2
+                          ? Color(0xFF56A67B)
+                          : Colors.grey),
+                ),
+                title: Text('search')),
+          ],
+        ),
       ),
     );
   }
