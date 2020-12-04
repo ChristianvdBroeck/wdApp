@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         bottomNavigationBar: Container(
-          height: MediaQuery.of(context).size.height * 0.07,
           child: BottomNavigationBar(
             backgroundColor: Color(0xFFF6F2F1),
             elevation: 0,
