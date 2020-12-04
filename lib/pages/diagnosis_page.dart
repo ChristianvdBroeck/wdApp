@@ -75,30 +75,27 @@ class DiagnoseTool extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        shadowColor: Colors.transparent,
+        backgroundColor: Color(0xFFF6F2F1),
+        actions: [
+          IconButton(
+            icon: Image.asset('images/backicon.png'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
+          ),
+          Expanded(child: Container())
+        ],
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height * 1,
         width: MediaQuery.of(context).size.width * 1,
         child: Column(
-          children: [
-            Spacer(flex: 1),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: Image.asset('images/homeicon.png'),
-                  color: Color(0xFF56A67B),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  },
-                ),
-              ],
-            ),
-            Spacer(flex: 30)
-          ],
+          children: [],
         ),
       ),
     );
