@@ -6,6 +6,7 @@ import 'home_page.dart';
 
 /// Basics from: https://dev.to/luizeduardotj/search-bar-in-flutter-33e1
 /// TODO:
+///   - hij zoekt nu nog op de keys van de diagnoses Map. dit moeten de values worden
 ///   - list moet lijst met diagnoses met hun symptomen worden
 ///   - list moet standaard niet zichtbaar zijn, pas na het invullen van query tonen
 ///   - recentList moet generiek worden -> kan denk ik pas na fix van boven (pas als de knop ingedrukt wordt dingen opslaan)
