@@ -4,6 +4,7 @@ import 'home_page.dart';
 
 /// Basics from: https://dev.to/luizeduardotj/search-bar-in-flutter-33e1
 /// TODO:
+///   - REFACTORING!!!
 ///   - hij zoekt nu nog op de keys van de diagnoses Map. dit moeten de values worden
 ///   - list moet lijst met diagnoses met hun symptomen worden
 ///   - list moet standaard niet zichtbaar zijn, pas na het invullen van query tonen
@@ -14,8 +15,8 @@ import 'home_page.dart';
 
 class SearchPage extends StatefulWidget {
   final List<String> list = diagnosis;
-  final Map<String, List<String>> diagnosisAndSymptoms = diagnosisSymptomsMapping;
-
+  Map<String, String> diagnosisAndSymptoms = diagnosisSymptomsMapping;
+  List<String> get symptoms => diagnosisSymptomsMapping.values.toList();
   List<String> get listSearch => diagnosisAndSymptoms.keys.toList();
 
   @override
@@ -23,9 +24,20 @@ class SearchPage extends StatefulWidget {
 }
 
 class Search extends SearchDelegate {
+  
+  getKeysByValueFromSearchValue(map, searchValue) {
+    map.forEach((element) {
+      if (element.value.toLowerCase.contains(searchValue.toLowerCase())) {
+        return element.key;
+      }
+    });
+  }
+
   @override
   // TODO: implement textInputAction
   TextInputAction get textInputAction => TextInputAction.search;
+
+  Map<String, String> get diagnosisAndSymptoms => diagnosisAndSymptoms;
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -51,21 +63,27 @@ class Search extends SearchDelegate {
 
   String selectedResult;
   List<String> searchResults = [];
+  List<String> symptomsResult = [];
 
   // resultaten na het uitvoeren van een zoekquery
   // TODO: listSearch.last vervangen met zoekresultaten
   @override
   Widget buildResults(BuildContext context) {
 
-  listSearch.forEach((element) {
-    print(element);
-  });
-
-  listSearch.forEach((element) {
+  symptoms.forEach((element) {
     if (element.toLowerCase().contains(query.toLowerCase())) {
-      searchResults.add(element);
+      symptomsResult.add(element);
     }
   });
+
+  symptomsResult.forEach((element) {
+    searchResults.add(getKeysByValueFromSearchValue(diagnosisAndSymptoms, element));
+  });
+  // listSearch.forEach((element) {
+  //   if (element.toLowerCase().contains(query.toLowerCase())) {
+  //     searchResults.add(element);
+  //   }
+  // });
 
    return ListView.builder(
       itemCount: searchResults.length,
@@ -89,7 +107,8 @@ class Search extends SearchDelegate {
   }
 
   final List<String> listSearch; // The list to search from
-  Search(this.listSearch);
+  final List<String> symptoms;
+  Search(this.listSearch, this.symptoms);
   List<String> recentList = ["Text Test 1", "Text Test 2"]; // TODO: make this dynamic
 
   @override
@@ -137,7 +156,7 @@ class _SearchPageState extends State<SearchPage> {
         actions: <Widget>[
           IconButton(
             onPressed: () {
-              showSearch(context: context, delegate: Search(widget.listSearch));
+              showSearch(context: context, delegate: Search(widget.listSearch, widget.symptoms));
             },
             icon: Icon(Icons.search),
             )
